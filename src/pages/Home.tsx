@@ -29,6 +29,7 @@ const homeStyle = css`
   text-align: center;
   padding: 2rem;
   justify-items: center;
+  margin-top: 10rem;
 
   h1 {
     font-size: var(--fs-500);
@@ -39,6 +40,10 @@ const homeStyle = css`
     font-size: var(--fs-900);
     font-family: var(--ff-serif);
     line-height: 1.1;
+  }
+
+  p {
+    font-family: var(--ff-sans-normal);
   }
 
   @media (min-width: 600px) {

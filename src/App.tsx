@@ -52,6 +52,8 @@ function App() {
         min-height: 100vh;
         background-repeat: no-repeat;
         background-size: cover;
+        display: flex;
+        flex-direction: column;
 
         @media (min-width: 600px) {
           background-image: ${backgrounds[currentPage].tablet};
@@ -86,6 +88,7 @@ const globalStyle = css`
   @import url("https://fonts.googleapis.com/css2?family=Bellefair&display=swap");
   @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap");
   @import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap");
   :root {
     --clr-dark: 230, 35%, 7%;
     --clr-light: 231, 77%, 90%;
@@ -95,7 +98,7 @@ const globalStyle = css`
     --fs-800: 3.5rem;
     --fs-700: 1.5rem;
     --fs-600: 1rem;
-    --fs-500: 1rem;
+    --fs-500: 1.75rem;
     --fs-400: 0.9375rem;
     --fs-300: 1rem;
     --fs-200: 0.875rem;
@@ -107,6 +110,8 @@ const globalStyle = css`
     --ls-large: 4.75px;
     --ls-medium: 2.7px;
     --ls-small: 2.3px;
+
+    font-size: 18px;
   }
 
   @media (min-width: 600px) {
