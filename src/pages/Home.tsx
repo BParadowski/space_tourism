@@ -44,7 +44,7 @@ const homeStyle = css`
 
   p {
     font-family: var(--ff-sans-normal);
-    letter-spacing: 1.4px;
+    letter-spacing: var(--ls-tiny);
   }
 
   @media (min-width: 600px) {

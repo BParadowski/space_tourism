@@ -69,7 +69,7 @@ const headerStyle = css`
       content: "";
       position: absolute;
       height: 0.125rem;
-      width: 28vw;
+      width: 30vw;
       background-color: hsl(var(--clr-white), 0.1);
       top: 50%;
       right: 97%;
@@ -129,7 +129,13 @@ const headerStyle = css`
       }
     }
   }
-
+  @media (max-width: 1400px) {
+    nav {
+      &::before {
+        width: 24vw;
+      }
+    }
+  }
   @media (max-width: 1200px) {
     padding-top: 0;
     margin-left: 2rem;
@@ -137,6 +143,10 @@ const headerStyle = css`
     nav {
       &::before {
         display: none;
+      }
+
+      ul {
+        padding-inline: clamp(0.5rem, 8vw, 5rem);
       }
 
       span {

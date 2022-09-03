@@ -110,6 +110,7 @@ const globalStyle = css`
     --ls-large: 4.75px;
     --ls-medium: 2.7px;
     --ls-small: 2.3px;
+    --ls-tiny: 1.4px
 
     font-size: 18px;
   }
