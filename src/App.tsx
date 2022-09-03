@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./pages/Home";
@@ -8,15 +8,62 @@ import Technology from "./pages/Technology";
 import data from "./assets/data.json";
 import { Global, css } from "@emotion/react";
 
+const backgrounds = [
+  {
+    page: "home",
+    mobile: "url(/images/home/background-home-mobile.jpg)",
+    tablet: "url(/images/home/background-home-tablet.jpg)",
+    desktop: "url(/images/home/background-home-desktop.jpg)",
+  },
+  {
+    page: "destination",
+    mobile: "url(/images/destination/background-destination-mobile.jpg)",
+    tablet: "url(/images/destination/background-destination-tablet.jpg)",
+    desktop: "url(/images/destination/background-destination-desktop.jpg)",
+  },
+  {
+    page: "crew",
+    mobile: "url(/images/crew/background-crew-mobile.jpg)",
+    tablet: "url(/images/crew/background-crew-tablet.jpg)",
+    desktop: "url(/images/crew/background-crew-desktop.jpg)",
+  },
+  {
+    page: "technology",
+    mobile: "url(/images/technology/background-technology-mobile.jpg)",
+    tablet: "url(/images/technology/background-technology-tablet.jpg)",
+    desktop: "url(/images/technology/background-technology-desktop.jpg)",
+  },
+];
+
 function App() {
   const destinationData = data["destinations"];
   const crewData = data["crew"];
   const technologyData = data["technology"];
+  const [currentPage, setCurrentPage] = useState(0);
+
+  function switchPageBackground(pageIndex: number) {
+    setCurrentPage(pageIndex);
+  }
 
   return (
-    <div>
+    <div
+      css={css`
+        background-image: ${backgrounds[currentPage].mobile};
+        min-height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @media (min-width: 600px) {
+          background-image: ${backgrounds[currentPage].tablet};
+        }
+
+        @media (min-width: 1200px) {
+          background-image: ${backgrounds[currentPage].desktop};
+        }
+      `}
+    >
       <Global styles={globalStyle} />
-      <Navbar />
+      <Navbar switchBackground={switchPageBackground} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -36,10 +83,68 @@ function App() {
 export default App;
 
 const globalStyle = css`
+  @import url("https://fonts.googleapis.com/css2?family=Bellefair&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
   :root {
     --clr-dark: 230, 35%, 7%;
     --clr-light: 231, 77%, 90%;
     --clr-white: 0, 0%, 100%;
+
+    --fs-900: clamp(5rem, 15vw + 1rem, 9.375rem);
+    --fs-800: 3.5rem;
+    --fs-700: 1.5rem;
+    --fs-600: 1rem;
+    --fs-500: 1rem;
+    --fs-400: 0.9375rem;
+    --fs-300: 1rem;
+    --fs-200: 0.875rem;
+
+    --ff-serif: "Bellefair", serif;
+    --ff-sans-cond: "Barlow Condensed", sans-serif;
+    --ff-sans-normal: "Barlow", sans-serif;
+
+    --ls-large: 4.75px;
+    --ls-medium: 2.7px;
+    --ls-small: 2.3px;
+  }
+
+  @media (min-width: 600px) {
+    :root {
+      --fs-800: 5rem;
+      --fs-700: 2.5rem;
+      --fs-600: 1.5rem;
+      --fs-500: 1.25rem;
+      --fs-400: 1rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    :root {
+      --fs-800: 6.25rem;
+      --fs-700: 3.5rem;
+      --fs-600: 2rem;
+      --fs-500: 1.75rem;
+      --fs-400: 1.125rem;
+      --fs-300: 1rem;
+      --fs-200: 0.875rem;
+    }
+  }
+
+  #root {
+    min-height: 100vh;
+    font-family: var(--ff-sans-normal);
+    background-color: hsl(var(--clr-dark));
+    color: hsl(var(--clr-white));
+    font-size: var(--fs-400);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-transform: uppercase;
+    font-family: var(--ff-serif);
+    font-weight: 400;
   }
 
   /* reset */
@@ -59,6 +164,7 @@ const globalStyle = css`
   p,
   picture {
     margin: 0;
+    font-weight: 400;
   }
 
   li {
@@ -72,7 +178,7 @@ const globalStyle = css`
   body {
     min-height: 100vh;
     text-rendering: optimizeSpeed;
-    line-height: 1.5;
+    line-height: 1.7;
   }
 
   picture,
