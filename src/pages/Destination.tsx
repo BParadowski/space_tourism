@@ -43,10 +43,10 @@ function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
       <nav>{destinationNav}</nav>
       <h2>{name}</h2>
       <p>{description}</p>
-      <h5>AVG. DISTANCE</h5>
+      <p className="subheading2">AVG. DISTANCE</p>
       <p className="subheading1">{distance}</p>
-      <h5>EST. TRAVEL TIME</h5>
-      <p className="subheading2">{travel}</p>
+      <p className="subheading2">EST. TRAVEL TIME</p>
+      <p className="subheading1">{travel}</p>
     </div>
   );
 }

@@ -22,7 +22,7 @@ function App() {
             path="/destination"
             element={<Destination dataArr={destinationData} />}
           />
-          <Route path="/crew" element={<Crew />} />
+          <Route path="/crew" element={<Crew dataArr={crewData} />} />
           <Route path="/technology" element={<Technology />} />
         </Routes>
       </div>
