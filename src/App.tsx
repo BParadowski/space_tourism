@@ -10,7 +10,7 @@ import data from "./assets/data.json";
 function App() {
   const destinationData = data["destinations"];
   const crewData = data["crew"];
-  const technology = data["technology"];
+  const technologyData = data["technology"];
 
   return (
     <>
@@ -23,7 +23,10 @@ function App() {
             element={<Destination dataArr={destinationData} />}
           />
           <Route path="/crew" element={<Crew dataArr={crewData} />} />
-          <Route path="/technology" element={<Technology />} />
+          <Route
+            path="/technology"
+            element={<Technology dataArr={technologyData} />}
+          />
         </Routes>
       </div>
     </>
