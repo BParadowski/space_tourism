@@ -80,7 +80,7 @@ const headerStyle = css`
       height: 6rem;
       margin: 0;
       display: flex;
-      gap: clamp(1rem, 4vw + 1rem, 6rem);
+      gap: clamp(1rem, 4vw, 6rem);
       align-items: center;
       padding-inline: clamp(0.5rem, 10vw, 10rem);
 
