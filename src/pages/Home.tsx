@@ -1,8 +1,9 @@
 import React from "react";
+import { css } from "@emotion/react";
 
 function Home() {
   return (
-    <div>
+    <div css={homeStyle}>
       <h5>SO, YOU WANT TO TRAVEL TO</h5>
       <h1>SPACE</h1>
       <p>
@@ -17,3 +18,9 @@ function Home() {
 }
 
 export default Home;
+
+const homeStyle = css`
+  display: grid;
+  background-image: url("/images/home/background-home-mobile.jpg");
+  color: hsl(var(--clr-white));
+`;
