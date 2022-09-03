@@ -1,32 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "./assets/shared/logo.svg";
 import { css } from "@emotion/react";
 
 function Navbar(props: { switchBackground: (pageIndex: number) => void }) {
   const { switchBackground } = props;
+  const location = useLocation();
 
   return (
     <header css={headerStyle}>
       <img src={logo} alt="Space travel logo" />
       <nav>
         <ul>
-          <li>
+          <li className={location.pathname === "/" ? "active" : ""}>
             <Link to="/" onClick={() => switchBackground(0)}>
               <span>00&ensp;</span> Home
             </Link>
           </li>
-          <li>
+          <li className={location.pathname === "/destination" ? "active" : ""}>
             <Link to="/destination" onClick={() => switchBackground(1)}>
               <span>01&ensp;</span> Destination
             </Link>
           </li>
-          <li>
+          <li className={location.pathname === "/crew" ? "active" : ""}>
             <Link to="/crew" onClick={() => switchBackground(2)}>
               <span>02&ensp;</span> Crew
             </Link>
           </li>
-          <li>
+          <li className={location.pathname === "/technology" ? "active" : ""}>
             <Link to="/technology" onClick={() => switchBackground(3)}>
               <span>03&ensp;</span> Technology
             </Link>
@@ -79,9 +80,9 @@ const headerStyle = css`
       height: 6rem;
       margin: 0;
       display: flex;
-      gap: clamp(3rem, 4vw + 1rem, 6rem);
+      gap: clamp(1rem, 4vw + 1rem, 6rem);
       align-items: center;
-      padding-inline: clamp(1.5rem, 10vw, 10rem);
+      padding-inline: clamp(0.5rem, 10vw, 10rem);
 
       li {
         position: relative;
@@ -97,11 +98,16 @@ const headerStyle = css`
           left: 0;
           height: 0.25rem;
           width: 0;
-          transition: width 250ms ease-in-out 0s;
+          transition: width 200ms ease-in-out 0s;
           border-radius: 100vh;
         }
 
         &:hover::before {
+          width: 100%;
+        }
+
+        &.active::before {
+          background-color: hsl(var(--clr-white));
           width: 100%;
         }
       }
@@ -120,6 +126,21 @@ const headerStyle = css`
         span {
           font-weight: 700;
         }
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    padding-top: 0;
+    margin-left: 2rem;
+
+    nav {
+      &::before {
+        display: none;
+      }
+
+      span {
+        display: none;
       }
     }
   }
