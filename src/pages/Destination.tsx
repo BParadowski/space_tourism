@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import AnimatedPage from "./AnimatedPage";
 import { AnimatePresence, motion } from "framer-motion";
 import { css } from "@emotion/react";
@@ -24,7 +24,7 @@ const backgrounds = {
 const animationVariants = {
   initial: {
     opacity: 0,
-    x: 50,
+    x: 35,
   },
   animated: {
     opacity: 1,
@@ -32,7 +32,7 @@ const animationVariants = {
   },
   exiting: {
     opacity: 0,
-    x: -50,
+    x: -35,
   },
 };
 
@@ -67,7 +67,6 @@ function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
         </h2>
         <AnimatePresence mode="wait">
           <motion.picture
-            variants={animationVariants}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -146,6 +145,8 @@ function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
 export default Destination;
 
 const layoutAndStyling = css`
+  overflow: hidden;
+
   display: grid;
   justify-items: center;
   text-align: center;
@@ -179,6 +180,7 @@ const layoutAndStyling = css`
     font-family: var(--ff-sans-normal);
     letter-spacing: var(--ls-tiny);
     font-size: var(--fs-400);
+    min-height: 10rem;
   }
 
   .separating-line {
@@ -264,7 +266,9 @@ const layoutAndStyling = css`
     picture {
       height: 300px;
     }
-
+    .description {
+      min-height: 5rem;
+    }
     h2 {
       place-self: start;
     }
@@ -291,9 +295,10 @@ const layoutAndStyling = css`
   @media (min-width: 1200px) {
     padding: 4rem 15rem 1rem 15rem;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(6, auto);
+    grid-template-rows: 1.5rem 3rem 115px auto auto auto;
 
     picture {
+      margin-top: 0;
       padding: 2rem;
       grid-row: 2/-1;
       grid-column: 1/2;
@@ -304,18 +309,31 @@ const layoutAndStyling = css`
       grid-row: 1/2;
       grid-column: 1/-1;
       font-size: var(--fs-400);
+      height: 2rem;
     }
-
+    h3 {
+      height: 115px;
+    }
     button {
       cursor: pointer;
     }
 
+    nav {
+      height: 3rem;
+      grid-row: 2/3;
+    }
+
     .description {
       text-align: start;
+      width: 50ch;
     }
 
     .separating-line {
       width: 90%;
     }
+  }
+
+  @media (min-height: 1080px) {
+    margin-top: 8rem;
   }
 `;

@@ -70,7 +70,7 @@ const homeStyle = css`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
     text-align: start;
-    margin-top: 10rem;
+    margin-top: 8rem;
 
     p {
       padding: 1rem;

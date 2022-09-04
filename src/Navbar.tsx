@@ -66,6 +66,7 @@ const headerStyle = css`
   justify-content: space-between;
   align-items: center;
   height: 6rem;
+  max-width: 100%;
 
   button {
     display: none;
@@ -211,14 +212,15 @@ const headerStyle = css`
     }
 
     nav {
-      visibility: hidden;
       backdrop-filter: blur(20px);
       position: fixed;
       inset: 0 0 0 30%;
       z-index: 2;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
       &.open {
-        visibility: visible;
+        transform: translateX(0);
       }
 
       ul {
