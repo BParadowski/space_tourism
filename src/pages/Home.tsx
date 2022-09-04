@@ -1,22 +1,32 @@
 import React from "react";
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
+import AnimatedPage from "./AnimatedPage";
+
+const backgrounds = {
+  page: "home",
+  mobile: "url(/images/home/background-home-mobile.jpg)",
+  tablet: "url(/images/home/background-home-tablet.jpg)",
+  desktop: "url(/images/home/background-home-desktop.jpg)",
+};
 
 function Home() {
   return (
-    <div css={homeStyle}>
-      <h1>SO, YOU WANT TO TRAVEL TO</h1>
-      <div className="title">SPACE</div>
-      <p>
-        Let’s face it: if you want to go to space, you might as well genuinely
-        go to outer space and not hover kind of on the edge of it. Well sit
-        back, and relax because we’ll give you a truly out of this world
-        experience!
-      </p>
-      <Link to="/destination" css={exploreButtonStyle}>
-        EXPLORE
-      </Link>
-    </div>
+    <AnimatedPage backgrounds={backgrounds}>
+      <div css={homeStyle}>
+        <h1>SO, YOU WANT TO TRAVEL TO</h1>
+        <div className="title">SPACE</div>
+        <p>
+          Let’s face it: if you want to go to space, you might as well genuinely
+          go to outer space and not hover kind of on the edge of it. Well sit
+          back, and relax because we’ll give you a truly out of this world
+          experience!
+        </p>
+        <Link to="/destination" css={exploreButtonStyle}>
+          EXPLORE
+        </Link>
+      </div>
+    </AnimatedPage>
   );
 }
 
@@ -27,9 +37,9 @@ const homeStyle = css`
   gap: 1.5rem;
   min-height: 100%;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
   justify-items: center;
-  margin-top: 10rem;
+  margin-top: 1rem;
 
   h1 {
     font-size: var(--fs-500);
@@ -48,6 +58,8 @@ const homeStyle = css`
   }
 
   @media (min-width: 600px) {
+    margin-top: 3.5rem;
+    padding: 2rem;
     * {
       max-width: 65%;
     }
@@ -57,6 +69,7 @@ const homeStyle = css`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
     text-align: start;
+    margin-top: 10rem;
 
     p {
       padding: 1rem;

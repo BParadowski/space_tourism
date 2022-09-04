@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";
@@ -7,77 +7,32 @@ import Crew from "./pages/Crew";
 import Technology from "./pages/Technology";
 import data from "./assets/data.json";
 import { Global, css } from "@emotion/react";
-
-const backgrounds = [
-  {
-    page: "home",
-    mobile: "url(/images/home/background-home-mobile.jpg)",
-    tablet: "url(/images/home/background-home-tablet.jpg)",
-    desktop: "url(/images/home/background-home-desktop.jpg)",
-  },
-  {
-    page: "destination",
-    mobile: "url(/images/destination/background-destination-mobile.jpg)",
-    tablet: "url(/images/destination/background-destination-tablet.jpg)",
-    desktop: "url(/images/destination/background-destination-desktop.jpg)",
-  },
-  {
-    page: "crew",
-    mobile: "url(/images/crew/background-crew-mobile.jpg)",
-    tablet: "url(/images/crew/background-crew-tablet.jpg)",
-    desktop: "url(/images/crew/background-crew-desktop.jpg)",
-  },
-  {
-    page: "technology",
-    mobile: "url(/images/technology/background-technology-mobile.jpg)",
-    tablet: "url(/images/technology/background-technology-tablet.jpg)",
-    desktop: "url(/images/technology/background-technology-desktop.jpg)",
-  },
-];
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
   const destinationData = data["destinations"];
   const crewData = data["crew"];
   const technologyData = data["technology"];
-  const [currentPage, setCurrentPage] = useState(0);
-
-  function switchPageBackground(pageIndex: number) {
-    setCurrentPage(pageIndex);
-  }
 
   return (
-    <div
-      css={css`
-        background-image: ${backgrounds[currentPage].mobile};
-        min-height: 100vh;
-        background-repeat: no-repeat;
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-
-        @media (min-width: 600px) {
-          background-image: ${backgrounds[currentPage].tablet};
-        }
-
-        @media (min-width: 1200px) {
-          background-image: ${backgrounds[currentPage].desktop};
-        }
-      `}
-    >
+    <div>
       <Global styles={globalStyle} />
-      <Navbar switchBackground={switchPageBackground} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/destination"
-          element={<Destination dataArr={destinationData} />}
-        />
-        <Route path="/crew" element={<Crew dataArr={crewData} />} />
-        <Route
-          path="/technology"
-          element={<Technology dataArr={technologyData} />}
-        />
-      </Routes>
+      <Navbar />
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/destination"
+            element={<Destination dataArr={destinationData} />}
+          />
+          <Route path="/crew" element={<Crew dataArr={crewData} />} />
+          <Route
+            path="/technology"
+            element={<Technology dataArr={technologyData} />}
+          />
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }

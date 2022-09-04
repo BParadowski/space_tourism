@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AnimatedPage from "./AnimatedPage";
 
 interface TechnologyData {
   name: string;
@@ -8,6 +9,13 @@ interface TechnologyData {
   };
   description: string;
 }
+
+const backgrounds = {
+  page: "technology",
+  mobile: "url(/images/technology/background-technology-mobile.jpg)",
+  tablet: "url(/images/technology/background-technology-tablet.jpg)",
+  desktop: "url(/images/technology/background-technology-desktop.jpg)",
+};
 
 function Technology(props: { dataArr: TechnologyData[] }) {
   const { dataArr } = props;
@@ -28,7 +36,7 @@ function Technology(props: { dataArr: TechnologyData[] }) {
     </ul>
   );
   return (
-    <div>
+    <AnimatedPage backgrounds={backgrounds}>
       <h5>
         <span>03</span> SPACE LAUNCH 101
       </h5>
@@ -40,7 +48,7 @@ function Technology(props: { dataArr: TechnologyData[] }) {
       <p className="subheader1">THE TERMINOLOGY...</p>
       <h3>{name}</h3>
       <p>{description}</p>
-    </div>
+    </AnimatedPage>
   );
 }
 

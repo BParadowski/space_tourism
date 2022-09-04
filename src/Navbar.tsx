@@ -1,34 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "./assets/shared/logo.svg";
+import hamburger from "./assets/shared/icon-hamburger.svg";
+import closeHamburger from "./assets/shared/icon-close.svg";
 import { css } from "@emotion/react";
 
-function Navbar(props: { switchBackground: (pageIndex: number) => void }) {
-  const { switchBackground } = props;
+function Navbar() {
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  function toggleMobileMenu() {
+    setMobileMenuOpen((state) => !state);
+  }
 
   return (
     <header css={headerStyle}>
       <img src={logo} alt="Space travel logo" />
-      <nav>
+      <button
+        className={mobileMenuOpen ? "open" : ""}
+        onClick={() => toggleMobileMenu()}
+      >
+        <span className="sr-only">Menu</span>
+      </button>
+      <nav className={mobileMenuOpen ? "open" : ""}>
         <ul>
-          <li className={location.pathname === "/" ? "active" : ""}>
-            <Link to="/" onClick={() => switchBackground(0)}>
+          <li className={/\/$/.test(location.pathname) ? "active" : ""}>
+            <Link to="/">
               <span>00&ensp;</span> Home
             </Link>
           </li>
-          <li className={location.pathname === "/destination" ? "active" : ""}>
-            <Link to="/destination" onClick={() => switchBackground(1)}>
+          <li
+            className={/\/destination/.test(location.pathname) ? "active" : ""}
+          >
+            <Link to="/destination">
               <span>01&ensp;</span> Destination
             </Link>
           </li>
-          <li className={location.pathname === "/crew" ? "active" : ""}>
-            <Link to="/crew" onClick={() => switchBackground(2)}>
+          <li className={/\/crew/.test(location.pathname) ? "active" : ""}>
+            <Link to="/crew">
               <span>02&ensp;</span> Crew
             </Link>
           </li>
-          <li className={location.pathname === "/technology" ? "active" : ""}>
-            <Link to="/technology" onClick={() => switchBackground(3)}>
+          <li
+            className={/\/technology/.test(location.pathname) ? "active" : ""}
+          >
+            <Link to="/technology">
               <span>03&ensp;</span> Technology
             </Link>
           </li>
@@ -41,12 +57,19 @@ function Navbar(props: { switchBackground: (pageIndex: number) => void }) {
 export default Navbar;
 
 const headerStyle = css`
+  position: fixed;
+  z-index: 20;
+  width: 100%;
   padding-top: 3rem;
   margin-left: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 6rem;
+
+  button {
+    display: none;
+  }
 
   img {
     height: 48px;
@@ -151,6 +174,48 @@ const headerStyle = css`
 
       span {
         display: none;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    button {
+      display: block;
+      border: none;
+      background-color: transparent;
+      margin-right: 3rem;
+      z-index: 100;
+      background-image: url(${hamburger});
+      aspect-ratio: 1/1;
+      height: 1.3rem;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      &.open {
+        background-image: url(${closeHamburger});
+      }
+    }
+
+    nav {
+      visibility: hidden;
+      backdrop-filter: blur(20px);
+      position: fixed;
+      inset: 0 0 0 30%;
+      z-index: 2;
+
+      &.open {
+        visibility: visible;
+      }
+
+      ul {
+        margin-top: 7rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+
+        span {
+          display: inline;
+        }
       }
     }
   }

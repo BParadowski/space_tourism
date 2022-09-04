@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AnimatedPage from "./AnimatedPage";
 
 interface CrewData {
   name: string;
@@ -9,6 +10,13 @@ interface CrewData {
   role: string;
   bio: string;
 }
+
+const backgrounds = {
+  page: "crew",
+  mobile: "url(/images/crew/background-crew-mobile.jpg)",
+  tablet: "url(/images/crew/background-crew-tablet.jpg)",
+  desktop: "url(/images/crew/background-crew-desktop.jpg)",
+};
 
 function Crew(props: { dataArr: CrewData[] }) {
   const { dataArr } = props;
@@ -30,7 +38,7 @@ function Crew(props: { dataArr: CrewData[] }) {
   );
 
   return (
-    <div>
+    <AnimatedPage backgrounds={backgrounds}>
       <h5>
         <span>02</span> MEET YOUR CREW
       </h5>
@@ -42,7 +50,7 @@ function Crew(props: { dataArr: CrewData[] }) {
       <p className="subheading1">{role}</p>
       <h3>{name}</h3>
       <p>{bio}</p>
-    </div>
+    </AnimatedPage>
   );
 }
 

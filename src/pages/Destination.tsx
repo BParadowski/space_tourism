@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import AnimatedPage from "./AnimatedPage";
 
 interface DestinationData {
   name: string;
@@ -10,6 +12,13 @@ interface DestinationData {
   distance: string;
   travel: string;
 }
+
+const backgrounds = {
+  page: "destination",
+  mobile: "url(/images/destination/background-destination-mobile.jpg)",
+  tablet: "url(/images/destination/background-destination-tablet.jpg)",
+  desktop: "url(/images/destination/background-destination-desktop.jpg)",
+};
 
 function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
   const { dataArr } = props;
@@ -32,22 +41,24 @@ function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
   );
 
   return (
-    <div>
+    <AnimatedPage backgrounds={backgrounds}>
       <h5>
         <span>01</span> PICK YOUR DESTINATION
       </h5>
-      <picture>
-        <source type="image/webp" srcSet={images.webp} />
-        <img src={images.png} alt="Picture of your chosen destination" />
-      </picture>
-      <nav>{destinationNav}</nav>
-      <h2>{name}</h2>
-      <p>{description}</p>
-      <p className="subheading2">AVG. DISTANCE</p>
-      <p className="subheading1">{distance}</p>
-      <p className="subheading2">EST. TRAVEL TIME</p>
-      <p className="subheading1">{travel}</p>
-    </div>
+      <motion.div>
+        <picture>
+          <source type="image/webp" srcSet={images.webp} />
+          <img src={images.png} alt="Picture of your chosen destination" />
+        </picture>
+        <nav>{destinationNav}</nav>
+        <h2>{name}</h2>
+        <p>{description}</p>
+        <p className="subheading2">AVG. DISTANCE</p>
+        <p className="subheading1">{distance}</p>
+        <p className="subheading2">EST. TRAVEL TIME</p>
+        <p className="subheading1">{travel}</p>
+      </motion.div>
+    </AnimatedPage>
   );
 }
 
