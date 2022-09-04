@@ -90,6 +90,7 @@ const exploreButtonStyle = css`
   cursor: pointer;
   letter-spacing: var(--ls-small);
   font-size: var(--fs-600);
+  font-family: var(--ff-serif);
   display: flex;
   justify-content: center;
   align-items: center;

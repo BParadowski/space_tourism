@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import AnimatedPage from "./AnimatedPage";
 import { AnimatePresence, motion } from "framer-motion";
 import { css } from "@emotion/react";
@@ -21,6 +21,21 @@ const backgrounds = {
   desktop: "url(/images/destination/background-destination-desktop.jpg)",
 };
 
+const animationVariants = {
+  initial: {
+    opacity: 0,
+    x: 50,
+  },
+  animated: {
+    opacity: 1,
+    x: 0,
+  },
+  exiting: {
+    opacity: 0,
+    x: -50,
+  },
+};
+
 function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
   const { dataArr } = props;
   const [currentDestination, setCurrentDestination] = useState(0);
@@ -31,7 +46,10 @@ function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
     <nav>
       <ul>
         {dataArr.map((destination, index) => (
-          <li key={destination.name}>
+          <li
+            key={destination.name}
+            className={currentDestination === index ? "active" : ""}
+          >
             <button onClick={() => setCurrentDestination(index)}>
               {destination.name}
             </button>
@@ -47,20 +65,79 @@ function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
         <h2>
           <span>01&ensp;</span> PICK YOUR DESTINATION
         </h2>
-        <picture>
-          <source type="image/webp" srcSet={images.webp} />
-          <img src={images.png} alt="Picture of your chosen destination" />
-        </picture>
+        <AnimatePresence mode="wait">
+          <motion.picture
+            variants={animationVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              ease: "easeOut",
+              duration: 0.6,
+            }}
+            key={`${name}picture`}
+          >
+            <source type="image/webp" srcSet={images.webp} />
+            <img src={images.png} alt="Picture of your chosen destination" />
+          </motion.picture>
+        </AnimatePresence>
         {destinationNav}
-        <h3>{name}</h3>
-        <p className="description">{description}</p>
-        <div className="separating-line"></div>
-        <motion.div className="distance-time-info">
-          <p className="subheading2">AVG. DISTANCE</p>
-          <p className="subheading1">{distance}</p>
-          <p className="subheading2">EST. TRAVEL TIME</p>
-          <p className="subheading1">{travel}</p>
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.h3
+            key={`${name}name`}
+            variants={animationVariants}
+            initial="initial"
+            animate="animated"
+            exit="exiting"
+            transition={{
+              ease: "easeOut",
+            }}
+          >
+            {name}
+          </motion.h3>
+          <motion.p
+            key={`${name}descr`}
+            variants={animationVariants}
+            initial="initial"
+            animate="animated"
+            exit="exiting"
+            transition={{
+              ease: "easeOut",
+            }}
+            className="description"
+          >
+            {description}
+          </motion.p>
+          <motion.div
+            key={`${name}separatingline`}
+            variants={animationVariants}
+            initial="initial"
+            animate="animated"
+            exit="exiting"
+            transition={{
+              ease: "easeOut",
+            }}
+            className="separating-line"
+          ></motion.div>
+
+          <motion.div
+            key={`${name}info`}
+            variants={animationVariants}
+            initial="initial"
+            animate="animated"
+            exit="exiting"
+            transition={{
+              ease: "easeOut",
+              duration: 0.5,
+            }}
+            className="distance-time-info"
+          >
+            <p className="subheading2">AVG. DISTANCE</p>
+            <p className="subheading1">{distance}</p>
+            <p className="subheading2">EST. TRAVEL TIME</p>
+            <p className="subheading1">{travel}</p>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </AnimatedPage>
   );
@@ -220,7 +297,6 @@ const layoutAndStyling = css`
       padding: 2rem;
       grid-row: 2/-1;
       grid-column: 1/2;
-      place-self: center;
       height: 520px;
     }
 

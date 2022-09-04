@@ -127,6 +127,9 @@ const globalStyle = css`
     margin: 0;
     font-weight: 400;
   }
+  html:focus-within {
+  scroll-behavior: smooth;
+}
 
   li {
     list-style: none;

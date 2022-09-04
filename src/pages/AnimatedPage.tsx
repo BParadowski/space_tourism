@@ -20,7 +20,7 @@ function AnimatedPage({ backgrounds, children }: Props) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.45 }}
       exit={{ opacity: 0 }}
       css={css`
         background-image: ${mobile};
