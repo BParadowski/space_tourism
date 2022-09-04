@@ -13,6 +13,9 @@ function Navbar() {
     setMobileMenuOpen((state) => !state);
   }
 
+  function closeMobileMenu() {
+    setMobileMenuOpen(false);
+  }
   return (
     <header css={headerStyle}>
       <img src={logo} alt="Space travel logo" />
@@ -25,26 +28,26 @@ function Navbar() {
       <nav className={mobileMenuOpen ? "open" : ""}>
         <ul>
           <li className={/\/$/.test(location.pathname) ? "active" : ""}>
-            <Link to="/">
+            <Link to="/" onClick={() => closeMobileMenu()}>
               <span>00&ensp;</span> Home
             </Link>
           </li>
           <li
             className={/\/destination/.test(location.pathname) ? "active" : ""}
           >
-            <Link to="/destination">
+            <Link to="/destination" onClick={() => closeMobileMenu()}>
               <span>01&ensp;</span> Destination
             </Link>
           </li>
           <li className={/\/crew/.test(location.pathname) ? "active" : ""}>
-            <Link to="/crew">
+            <Link to="/crew" onClick={() => closeMobileMenu()}>
               <span>02&ensp;</span> Crew
             </Link>
           </li>
           <li
             className={/\/technology/.test(location.pathname) ? "active" : ""}
           >
-            <Link to="/technology">
+            <Link to="/technology" onClick={() => closeMobileMenu()}>
               <span>03&ensp;</span> Technology
             </Link>
           </li>
@@ -217,7 +220,7 @@ const headerStyle = css`
       inset: 0 0 0 30%;
       z-index: 2;
       transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+      transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
       &.open {
         transform: translateX(0);

@@ -296,7 +296,11 @@ const layoutAndStyling = css`
       line-height: 1.1;
     }
   }
-  @media (min-height: 1080px) {
+  @media (min-height: 1080px) and (min-width: 1400px) {
     margin-top: 12rem;
+  }
+
+  @media (min-height: 1200px) and (max-width: 900px) {
+    margin-top: 5rem;
   }
 `;

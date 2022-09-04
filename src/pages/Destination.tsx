@@ -333,7 +333,11 @@ const layoutAndStyling = css`
     }
   }
 
-  @media (min-height: 1080px) {
-    margin-top: 8rem;
+  @media (min-height: 1080px) and (min-width: 1400px) {
+    margin-top: 10rem;
+  }
+
+  @media (min-height: 1200px) and (max-width: 900px) {
+    margin-top: 5rem;
   }
 `;
