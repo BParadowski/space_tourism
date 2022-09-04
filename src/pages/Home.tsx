@@ -55,6 +55,7 @@ const homeStyle = css`
   p {
     font-family: var(--ff-sans-normal);
     letter-spacing: var(--ls-tiny);
+    font-size: var(--fs-400);
   }
 
   @media (min-width: 600px) {

@@ -57,11 +57,11 @@ function Navbar() {
 export default Navbar;
 
 const headerStyle = css`
-  position: fixed;
+  position: absolute;
   z-index: 20;
-  width: 100%;
+  width: 100vw;
   padding-top: 3rem;
-  margin-left: 3rem;
+  margin-left: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,6 +72,7 @@ const headerStyle = css`
   }
 
   img {
+    margin-left: 3rem;
     height: 48px;
     aspect-ratio: 1/1;
     z-index: 1;
@@ -161,7 +162,11 @@ const headerStyle = css`
   }
   @media (max-width: 1200px) {
     padding-top: 0;
-    margin-left: 2rem;
+    margin-left: 0;
+
+    img {
+      margin-left: 2rem;
+    }
 
     nav {
       &::before {
@@ -179,17 +184,26 @@ const headerStyle = css`
   }
 
   @media (max-width: 600px) {
+    margin-left: 0;
+    height: 5rem;
+    justify-content: space-around;
+    img {
+      margin-left: 1.5rem;
+    }
+
     button {
+      margin-left: auto;
       display: block;
       border: none;
       background-color: transparent;
-      margin-right: 3rem;
       z-index: 100;
+      margin-right: 1.5rem;
       background-image: url(${hamburger});
       aspect-ratio: 1/1;
       height: 1.3rem;
       background-repeat: no-repeat;
       background-size: cover;
+      padding-inline: 0;
 
       &.open {
         background-image: url(${closeHamburger});
