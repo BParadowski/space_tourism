@@ -19,11 +19,11 @@ function App() {
     <div>
       <Global styles={globalStyle} />
       <Navbar />
-      <AnimatePresence>
-        <Routes location={location} key={location.pathname}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname.split("/")[1]}>
           <Route path="/" element={<Home />} />
           <Route
-            path="/destination"
+            path="/destination/*"
             element={<Destination dataArr={destinationData} />}
           />
           <Route path="/crew" element={<Crew dataArr={crewData} />} />

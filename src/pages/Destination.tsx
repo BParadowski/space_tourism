@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import AnimatedPage from "./AnimatedPage";
+import { useLocation } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+import AnimatedTarget from "./AnimatedTarget";
+import { AnimatePresence } from "framer-motion";
 
-interface DestinationData {
+export interface DestinationData {
   name: string;
   images: {
     png: string;
@@ -22,42 +25,67 @@ const backgrounds = {
 
 function Destination(props: { dataArr: DestinationData[] }): JSX.Element {
   const { dataArr } = props;
-  const [currentDestination, setCurrentDestination] = useState(0);
-  const { name, images, description, distance, travel } =
-    dataArr[currentDestination];
-
-  function switchDestination(index: number) {
-    setCurrentDestination(index);
-  }
+  const location = useLocation();
 
   const destinationNav = (
     <ul>
       {dataArr.map((destination, index) => (
-        <li key={destination.name} onClick={() => switchDestination(index)}>
-          {destination.name}
+        <li key={destination.name}>
+          <Link to={index === 0 ? "" : destination.name.toLowerCase()}>
+            {destination.name}
+          </Link>
         </li>
       ))}
     </ul>
   );
+
+  const targets = dataArr.map((targetData, index) => {
+    if (index === 0) {
+      return (
+        <Route
+          index
+          key={targetData.name}
+          element={
+            <AnimatedTarget
+              name={targetData.name}
+              images={targetData.images}
+              description={targetData.description}
+              distance={targetData.distance}
+              travel={targetData.travel}
+            />
+          }
+        />
+      );
+    } else {
+      return (
+        <Route
+          key={targetData.name}
+          path={targetData.name.toLowerCase()}
+          element={
+            <AnimatedTarget
+              name={targetData.name}
+              images={targetData.images}
+              description={targetData.description}
+              distance={targetData.distance}
+              travel={targetData.travel}
+            />
+          }
+        />
+      );
+    }
+  });
 
   return (
     <AnimatedPage backgrounds={backgrounds}>
       <h5>
         <span>01</span> PICK YOUR DESTINATION
       </h5>
-      <motion.div>
-        <picture>
-          <source type="image/webp" srcSet={images.webp} />
-          <img src={images.png} alt="Picture of your chosen destination" />
-        </picture>
-        <nav>{destinationNav}</nav>
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <p className="subheading2">AVG. DISTANCE</p>
-        <p className="subheading1">{distance}</p>
-        <p className="subheading2">EST. TRAVEL TIME</p>
-        <p className="subheading1">{travel}</p>
-      </motion.div>
+      <nav>{destinationNav}</nav>
+      <AnimatePresence mode="wait">
+        <Routes key={location.pathname.split("/")[2] ?? "basePage"}>
+          {targets}
+        </Routes>
+      </AnimatePresence>
     </AnimatedPage>
   );
 }
