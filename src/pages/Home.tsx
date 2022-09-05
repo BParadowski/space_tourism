@@ -5,9 +5,9 @@ import AnimatedPage from "./AnimatedPage";
 
 const backgrounds = {
   page: "home",
-  mobile: "url(/images/home/background-home-mobile.jpg)",
-  tablet: "url(/images/home/background-home-tablet.jpg)",
-  desktop: "url(/images/home/background-home-desktop.jpg)",
+  mobile: "url(images/home/background-home-mobile.jpg)",
+  tablet: "url(images/home/background-home-tablet.jpg)",
+  desktop: "url(images/home/background-home-desktop.jpg)",
 };
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
           back, and relax because we’ll give you a truly out of this world
           experience!
         </p>
-        <Link to="/destination" css={exploreButtonStyle}>
+        <Link to="/space_tourism/destination" css={exploreButtonStyle}>
           EXPLORE
         </Link>
       </div>

@@ -16,9 +16,9 @@ export interface DestinationData {
 
 const backgrounds = {
   page: "destination",
-  mobile: "url(/images/destination/background-destination-mobile.jpg)",
-  tablet: "url(/images/destination/background-destination-tablet.jpg)",
-  desktop: "url(/images/destination/background-destination-desktop.jpg)",
+  mobile: "url(images/destination/background-destination-mobile.jpg)",
+  tablet: "url(images/destination/background-destination-tablet.jpg)",
+  desktop: "url(images/destination/background-destination-desktop.jpg)",
 };
 
 const animationVariants = {
@@ -293,16 +293,26 @@ const layoutAndStyling = css`
   }
 
   @media (min-width: 1200px) {
-    padding: 4rem 15rem 1rem 15rem;
+    padding-block: 4rem 1rem;
+    padding-inline: clamp(2rem, 7vw, 15rem);
+    place-items: flex-start;
+
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1.5rem 3rem 115px auto auto auto;
+    row-gap: 1rem;
 
     picture {
-      margin-top: 0;
-      padding: 2rem;
+      margin-bottom: 2rem;
+      margin-top: 4rem;
+      margin-left: auto;
+      margin-right: clamp(2rem, 7vw + 0.5rem, 6rem);
       grid-row: 2/-1;
       grid-column: 1/2;
-      height: 520px;
+      height: clamp(380px, 40vw, 480px);
+      img {
+        height: inherit;
+        width: inherit;
+      }
     }
 
     h2 {
@@ -325,11 +335,24 @@ const layoutAndStyling = css`
 
     .description {
       text-align: start;
-      width: 50ch;
+      width: clamp(12rem, 35vw, 50ch);
     }
 
     .separating-line {
+      margin-top: 0.5rem;
       width: 90%;
+    }
+
+    .distance-time-info {
+      margin-top: 0;
+      .subheading2 {
+        margin-bottom: 0;
+        place-self: start;
+      }
+
+      .subheading1 {
+        place-self: start;
+      }
     }
   }
 

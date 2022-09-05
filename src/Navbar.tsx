@@ -27,27 +27,35 @@ function Navbar() {
       </button>
       <nav className={mobileMenuOpen ? "open" : ""}>
         <ul>
-          <li className={/\/$/.test(location.pathname) ? "active" : ""}>
-            <Link to="/" onClick={() => closeMobileMenu()}>
+          <li
+            className={/space_tourism$/.test(location.pathname) ? "active" : ""}
+          >
+            <Link to="/space_tourism" onClick={() => closeMobileMenu()}>
               <span>00&ensp;</span> Home
             </Link>
           </li>
           <li
             className={/\/destination/.test(location.pathname) ? "active" : ""}
           >
-            <Link to="/destination" onClick={() => closeMobileMenu()}>
+            <Link
+              to="/space_tourism/destination"
+              onClick={() => closeMobileMenu()}
+            >
               <span>01&ensp;</span> Destination
             </Link>
           </li>
           <li className={/\/crew/.test(location.pathname) ? "active" : ""}>
-            <Link to="/crew" onClick={() => closeMobileMenu()}>
+            <Link to="/space_tourism/crew" onClick={() => closeMobileMenu()}>
               <span>02&ensp;</span> Crew
             </Link>
           </li>
           <li
             className={/\/technology/.test(location.pathname) ? "active" : ""}
           >
-            <Link to="/technology" onClick={() => closeMobileMenu()}>
+            <Link
+              to="/space_tourism/technology"
+              onClick={() => closeMobileMenu()}
+            >
               <span>03&ensp;</span> Technology
             </Link>
           </li>

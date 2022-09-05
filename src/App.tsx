@@ -20,15 +20,18 @@ function App() {
       <Global styles={globalStyle} />
       <Navbar />
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname.split("/")[1]}>
-          <Route path="/" element={<Home />} />
+        <Routes location={location} key={location.pathname}>
+          <Route path="/space_tourism/" element={<Home />} />
           <Route
-            path="/destination/*"
+            path="/space_tourism/destination"
             element={<Destination dataArr={destinationData} />}
           />
-          <Route path="/crew" element={<Crew dataArr={crewData} />} />
           <Route
-            path="/technology"
+            path="/space_tourism/crew"
+            element={<Crew dataArr={crewData} />}
+          />
+          <Route
+            path="/space_tourism/technology"
             element={<Technology dataArr={technologyData} />}
           />
         </Routes>

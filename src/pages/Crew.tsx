@@ -15,9 +15,9 @@ interface CrewData {
 
 const backgrounds = {
   page: "crew",
-  mobile: "url(/images/crew/background-crew-mobile.jpg)",
-  tablet: "url(/images/crew/background-crew-tablet.jpg)",
-  desktop: "url(/images/crew/background-crew-desktop.jpg)",
+  mobile: "url(images/crew/background-crew-mobile.jpg)",
+  tablet: "url(images/crew/background-crew-tablet.jpg)",
+  desktop: "url(images/crew/background-crew-desktop.jpg)",
 };
 
 const animationVariants = {
@@ -138,6 +138,12 @@ const layoutAndStyling = css`
     span {
       opacity: 0.5;
       font-weight: bold;
+      .subheading2 {
+        color: hsl(var(--clr-light));
+        font-size: var(--fs-200);
+        font-family: var(--ff-sans-cond);
+        letter-spacing: var(--ls-medium);
+      }
     }
   }
   .picture-underlined {
@@ -241,23 +247,27 @@ const layoutAndStyling = css`
   @media (min-width: 1200px) {
     min-height: 100%;
     margin-block: 4rem 0rem;
-    padding-inline: 15rem;
-    grid-template-columns: 3fr 2fr;
-    grid-template-rows: 3rem 9rem 10rem 5rem;
+    padding-inline: clamp(2rem, 7vw, 25rem);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3rem auto 10rem 5rem;
     text-align: start;
-    column-gap: 5rem;
+    column-gap: clamp(1rem, 3vw + 1rem, 5rem);
     padding-block: 0;
+    gap: 1rem;
 
     .picture-underlined {
       grid-column: 2/3;
       grid-row: 1/-1;
       place-self: flex-end;
+      padding-right: clamp(0rem, 7vw, 6rem);
 
       picture,
       img {
         object-fit: cover;
         height: 100%;
         max-height: 30rem;
+        place-self: flex-start;
+        margin-top: 0;
       }
 
       div {
@@ -267,7 +277,9 @@ const layoutAndStyling = css`
 
     .name-title {
       place-self: flex-start;
-      width: max-content;
+      max-width: 50vw;
+      min-height: 8rem;
+      margin-top: 4rem;
     }
 
     ul {
